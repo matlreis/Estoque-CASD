@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from database.views import gerenciar_estoque
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('estoque/', gerenciar_estoque, name='estoque'),
 ]

@@ -65,8 +65,8 @@ class Item(models.Model):
 
     tipo_estoque = models.CharField(max_length=20, choices=TipoEstoque.choices)
 
-    quant_total = models.PositiveBigIntegerField()
-    quant_uso = models.PositiveBigIntegerField()
+    quant_total = models.PositiveIntegerField()
+    quant_uso = models.PositiveIntegerField(default=0)
 
 class Uso(models.Model):
     id_item = models.ForeignKey(Item, on_delete=models.CASCADE)

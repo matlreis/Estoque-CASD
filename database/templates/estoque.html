@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+        .formulario { margin-bottom: 30px; padding: 15px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+    <h1>Controle de Estoque</h1>
+
+    <!-- FORMULÁRIO DE INSERÇÃO -->
+    <div class="formulario">
+        <h2>Adicionar Novo Produto</h2>
+        <form method="POST">
+            {% csrf_token %} <!-- Obrigatório no Django por segurança contra ataques -->
+            
+            {{ form.as_p }} <!-- Renderiza os campos do formulário automaticamente -->
+            
+            <button type="submit">Salvar no Estoque</button>
+        </form>
+    </div>
+
+    <!-- TABELA DE VISUALIZAÇÃO -->
+    <h2>Itens Atuais</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome do Item</th>
+                <th>Tipo do Estoque</th>
+                <th>Quantidade Total</th>
+                <th>Quantidade em Uso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- O Django repete o <tr> para cada produto no banco -->
+            {% for item in itens %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.nome }}</td>
+                    <td>{{ item.tipo_estoque }}</td>
+                    <td>{{ item.quant_total }}</td>
+                    <td>{{ item.quant_uso }}</td>
+                </tr>
+            <!-- Caso o banco esteja vazio -->
+            {% empty %}
+                <tr>
+                    <td colspan="4">Nenhum produto cadastrado no estoque.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
