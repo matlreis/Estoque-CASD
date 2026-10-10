@@ -44,6 +44,8 @@ cover/
 
 # Django stuff:
 *.log
+.my_pgpass
+.pg_service.conf
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
